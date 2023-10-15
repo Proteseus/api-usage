@@ -61,7 +61,7 @@ def get_usage(api_key, date, use_own_key=False):
 
 # Convert date to UTC
 def to_utc(date):
-    local = timezone('America/Los_Angeles')  # Replace with your timezone
+    local = timezone('Africa/Addis_Ababa')  # Replace with your timezone
     naive = datetime.datetime.strptime(date, '%Y-%m-%d')
     local_dt = local.localize(naive, is_dst=None)
     utc_dt = local_dt.astimezone(utc)
@@ -70,7 +70,7 @@ def to_utc(date):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    default_date = datetime.date.today() + datetime.timedelta(days=1)
+    default_date = datetime.date.today()
     date = request.args.get('date')
 
     if request.method == 'POST':
