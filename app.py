@@ -94,9 +94,14 @@ def index():
     granularity = request.args.get('granularity', '60')  # Get granularity from query parameters, default is '60'
 
     if date is None:
-        date = (datetime.date.today().strftime('%Y-%m-%d') - datetime.timedelta(days=1)).strftime('%Y-%m-%d')
+        date = (datetime.date.today() - datetime.timedelta(days=1)).strftime('%Y-%m-%d')
 
-    date = to_utc(date)
+    print(type(date))
+    if type(date) is str:
+        date = to_utc(date)
+    else:
+        date = to_utc(date.strftime('%Y-%m-%d'))
+    
     usage_data, whisper_data = get_usage(api_key, date, use_own_key)
     if usage_data is None or whisper_data is None:
         # Handle the error (e.g., by showing an error message to the user and returning early)
