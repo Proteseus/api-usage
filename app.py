@@ -70,7 +70,7 @@ def to_utc(date):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    default_date = datetime.date.today()
+    default_date = datetime.date.today() + datetime.timedelta(days=1)
     date = request.args.get('date')
 
     if request.method == 'POST':
